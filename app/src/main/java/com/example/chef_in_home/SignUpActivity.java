@@ -21,21 +21,21 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
-    Button login_btn;
+public class SignUpActivity extends AppCompatActivity {
+    Button register_btn;
     EditText editTextEmail, editTextPassword;
     RadioGroup radioGroupRole;
     RadioButton radioUser, radioAdmin;
     private FirebaseAuth auth;
-    private   String role = "";
+    private String role = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
 
-        login_btn = findViewById(R.id.login_btn);
+        register_btn = findViewById(R.id.register_btn);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         radioGroupRole = findViewById(R.id.radioGroupRole);
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
+        register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = editTextEmail.getText().toString().trim();
@@ -59,20 +59,20 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (email.isEmpty() || password.isEmpty() || role.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Email, password, and role cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Email, password, and role cannot be empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(LoginActivity.this, "Login success as " + role, Toast.LENGTH_SHORT).show();
-                            if(role == "Admin" || email == "suhas@gmail.com"){
-                                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                                //  intent.putExtra("user_role", role); // Pass the role to MainActivity
+                            Toast.makeText(SignUpActivity.this, "Sign up success as " + role, Toast.LENGTH_SHORT).show();
+                            if(role == "Admin" && email == "suhas@gmail.com"){
+                                Intent intent = new Intent(SignUpActivity.this, AdminActivity.class);
+                                // intent.putExtra("user_role", role); // Pass the role to MainActivity
                                 startActivity(intent);
                                 finish();
                             }else {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                //  intent.putExtra("user_role", role); // Pass the role to MainActivity
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                // intent.putExtra("user_role", role); // Pass the role to MainActivity
                                 startActivity(intent);
                                 finish();
                             }
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LoginActivity.this, "Login failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Sign up failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -89,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void doSignUp(View view){
-        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+    public void doSignIn(View view){
+        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 }
