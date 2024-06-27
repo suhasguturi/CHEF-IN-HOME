@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:inputType="textEmailAddress"
-            android:padding="10dp"/>
+            android:minHeight="48dp"
+            android:padding="16dp"/>
 
         <EditText
             android:hint="Password"
@@ -31,7 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:inputType="textPassword"
-            android:padding="10dp"/>
+            android:minHeight="48dp"
+            android:padding="16dp"/>
 
         <RadioGroup
             android:id="@+id/radioGroupRole"
@@ -45,13 +47,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:minHeight="48dp"
+                android:padding="16dp"/>
 
             <RadioButton
                 android:id="@+id/radioAdmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Admin"/>
+                android:text="Admin"
+                android:minHeight="48dp"
+                android:padding="16dp"/>
         </RadioGroup>
 
         <Button
@@ -60,6 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:minHeight="48dp"
+            android:padding="16dp"
             android:backgroundTint="@color/black"/>
 
         <LinearLayout
@@ -73,14 +81,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Already signed up?"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:minHeight="48dp"
+                android:padding="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:onClick="doSignIn"
-                android:text="Login"/>
+                android:text="Login"
+                android:minHeight="48dp"
+                android:padding="16dp"/>
         </LinearLayout>
 
     </LinearLayout>

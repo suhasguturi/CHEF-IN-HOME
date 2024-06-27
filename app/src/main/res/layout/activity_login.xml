@@ -19,6 +19,8 @@
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
+
             android:layout_marginTop="20dp"
             android:inputType="textEmailAddress"
             android:padding="10dp"/>
@@ -29,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:minHeight="48dp"
             android:inputType="textPassword"
             android:padding="10dp"/>
 
@@ -76,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:padding="16dp"
         android:onClick="doSignUp"
         android:text="Sign Up"
         android:textColor="@color/black" />
