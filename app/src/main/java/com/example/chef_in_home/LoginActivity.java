@@ -12,9 +12,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     RadioGroup radioGroupRole;
     RadioButton radioUser, radioAdmin;
     private FirebaseAuth auth;
-    private   String role = "";
+    private String role = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
                 String password = editTextPassword.getText().toString().trim();
                 int selectedRoleId = radioGroupRole.getCheckedRadioButtonId();
 
-
                 if (selectedRoleId == R.id.radioUser) {
                     role = "User";
                 } else if (selectedRoleId == R.id.radioAdmin) {
@@ -65,18 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(LoginActivity.this, "Login success as " + role, Toast.LENGTH_SHORT).show();
-                            if(role == "Admin" || email == "suhas@gmail.com"){
-                                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                                //  intent.putExtra("user_role", role); // Pass the role to MainActivity
-                                startActivity(intent);
-                                finish();
-                            }else {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                //  intent.putExtra("user_role", role); // Pass the role to MainActivity
-                                startActivity(intent);
-                                finish();
-                            }
-
+                            Intent intent = new Intent(LoginActivity.this, ListViewActivity.class); // Change to ListViewActivity
+                            startActivity(intent);
+                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
