@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() == null){
-                    Toast.makeText(MainActivity.this, "User not sign", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "User not sign, plaease  sign in", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this,LoginActivity.class );
                     startActivity(intent);
                     finish();
