@@ -11,7 +11,7 @@ public class Chef {
     private String bio;
 
     public Chef() {
-        // Default constructor
+        // Default constructor required for Firebase
     }
 
     public Chef(String id, String name, String specialty, boolean available, String contact, String experience, double rating, String bio) {
