@@ -22,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView textViewUsername, textViewEmail, textViewContact, textViewRole;
     private Button buttonEditProfile;
-
+// firebase
     private FirebaseAuth auth;
     private DatabaseReference usersRef;
     private String userId;
