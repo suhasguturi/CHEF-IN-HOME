@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChefActivity extends AppCompatActivity {
-
+  // chef activity
     private static final String TAG = "ChefActivity";
     private RecyclerView recyclerViewRequests;
     private RequestAdapter requestAdapter;
