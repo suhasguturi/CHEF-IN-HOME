@@ -1,5 +1,6 @@
 package com.example.chef_in_home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,79 +10,91 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
     Button register_btn;
-    EditText editTextEmail, editTextPassword;
+    EditText editTextName, editTextEmail, editTextPassword;
     RadioGroup radioGroupRole;
-    RadioButton radioUser, radioAdmin;
+    RadioButton radioUser, radioChef;
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private DatabaseReference usersRef;
     private String role = "";
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up);
 
         register_btn = findViewById(R.id.register_btn);
+        editTextName = findViewById(R.id.editTextName);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         radioGroupRole = findViewById(R.id.radioGroupRole);
         radioUser = findViewById(R.id.radioUser);
-        radioAdmin = findViewById(R.id.radioAdmin);
+        radioChef = findViewById(R.id.radioChef);
 
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        usersRef = database.getReference("users");
 
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = editTextName.getText().toString().trim();
                 String email = editTextEmail.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 int selectedRoleId = radioGroupRole.getCheckedRadioButtonId();
 
-
                 if (selectedRoleId == R.id.radioUser) {
                     role = "User";
-                } else if (selectedRoleId == R.id.radioAdmin) {
-                    role = "Admin";
+                } else if (selectedRoleId == R.id.radioChef) {
+                    role = "Chef";
                 }
 
-                if (email.isEmpty() || password.isEmpty() || role.isEmpty()) {
-                    Toast.makeText(SignUpActivity.this, "Email, password, and role cannot be empty", Toast.LENGTH_SHORT).show();
+                if (name.isEmpty() || email.isEmpty() || password.isEmpty() || role.isEmpty()) {
+                    Toast.makeText(SignUpActivity.this, "Name, email, password, and role cannot be empty", Toast.LENGTH_SHORT).show();
                 } else {
                     auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(SignUpActivity.this, "Sign up success as " + role, Toast.LENGTH_SHORT).show();
-                            if(role == "Admin" && email == "suhas@gmail.com"){
-                                Intent intent = new Intent(SignUpActivity.this, AdminActivity.class);
-                                // intent.putExtra("user_role", role); // Pass the role to MainActivity
-                                startActivity(intent);
-                                finish();
-                            }else {
-                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                                // intent.putExtra("user_role", role); // Pass the role to MainActivity
-                                startActivity(intent);
-                                finish();
-                            }
-
+                            String userId = auth.getCurrentUser().getUid();
+                            User newUser = new User(name, email, role,"xxx xxxx xxxx");
+                            usersRef.child(userId).setValue(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SignUpActivity.this, "Sign up success as " + role, Toast.LENGTH_SHORT).show();
+                                    if (role.equals("Chef")) {
+                                        Intent intent = new Intent(SignUpActivity.this, ChefActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Intent intent = new Intent(SignUpActivity.this, UserActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SignUpActivity.this, "Failed to save user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(SignUpActivity.this, "Sign up failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Sign up failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

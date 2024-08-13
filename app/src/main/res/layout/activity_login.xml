@@ -15,75 +15,62 @@
         android:orientation="vertical">
 
         <EditText
-            android:hint="Email"
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-
             android:layout_marginTop="20dp"
             android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:minHeight="48dp"
             android:padding="10dp"/>
 
         <EditText
-            android:hint="Password"
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:minHeight="48dp"
             android:inputType="textPassword"
+            android:hint="Password"
+            android:minHeight="48dp"
             android:padding="10dp"/>
 
-        <RadioGroup
-            android:id="@+id/radioGroupRole"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewForgetPassword"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="User"
-                android:layout_marginRight="20dp"/>
-
-            <RadioButton
-                android:id="@+id/radioAdmin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Admin"/>
-        </RadioGroup>
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:text="Forget password?"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
         <Button
-            android:text="Login"
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/black"
-            android:layout_marginTop="20dp"/>
-
+            android:background="@color/colorPrimary"
+            android:text="Login"/>
 
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account?"
         android:layout_marginTop="20dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Don't have an account?"/>
 
     <TextView
+        android:id="@+id/textViewSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:padding="16dp"
-        android:onClick="doSignUp"
         android:text="Sign Up"
-        android:textColor="@color/black" />
-
-
+        android:textColor="@color/black"
+        android:onClick="doSignUp"/>
 
 </LinearLayout>

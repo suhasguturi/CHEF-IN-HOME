@@ -16,6 +16,16 @@
         android:orientation="vertical">
 
         <EditText
+            android:hint="Name"
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:padding="16dp"/>
+
+        <EditText
             android:hint="Email"
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
@@ -52,10 +62,10 @@
                 android:padding="16dp"/>
 
             <RadioButton
-                android:id="@+id/radioAdmin"
+                android:id="@+id/radioChef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Admin"
+                android:text="Chef"
                 android:minHeight="48dp"
                 android:padding="16dp"/>
         </RadioGroup>
@@ -68,7 +78,7 @@
             android:layout_marginTop="20dp"
             android:minHeight="48dp"
             android:padding="16dp"
-            android:backgroundTint="@color/black"/>
+            android:backgroundTint="@color/colorPrimary"/>
 
         <LinearLayout
             android:layout_width="match_parent"
