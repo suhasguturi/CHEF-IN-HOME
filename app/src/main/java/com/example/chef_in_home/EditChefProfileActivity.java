@@ -105,6 +105,7 @@ public class EditChefProfileActivity extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 // Save name to the users node
                 DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users").child(chefId);
+                usersReference.child("contact").setValue(contact);
                 usersReference.child("name").setValue(name).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

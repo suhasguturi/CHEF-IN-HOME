@@ -24,6 +24,7 @@ public class ChefDetailsActivity extends AppCompatActivity {
     private Button buttonRequestChef;
     private DatabaseReference chefRef, usersRef;
     private FirebaseAuth auth;
+    private String userId, userName,userContact;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -32,22 +33,18 @@ public class ChefDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chef_details);
 
         auth = FirebaseAuth.getInstance();
-        usersRef = FirebaseDatabase.getInstance().getReference().child("users").child(auth.getCurrentUser().getUid());
+        if(auth.getCurrentUser() != null){
+            userId = auth.getCurrentUser().getUid();
+        }
+        usersRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 
         // Fetch and display user details
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String username = dataSnapshot.child("name").getValue(String.class);
-                    String email = dataSnapshot.child("email").getValue(String.class);
-                    String role = dataSnapshot.child("role").getValue(String.class);
-
-                    if (username != null && email != null && role != null) {
-//                        textViewUsername.setText("Username: " + username);
-//                        textViewEmail.setText("Email: " + email);
-//                        textViewRole.setText("Role: " + role);
-                    }
+                    userName = dataSnapshot.child("name").getValue(String.class);
+                    userContact = dataSnapshot.child("contact").getValue(String.class);
                 }
             }
 
@@ -102,25 +99,22 @@ public class ChefDetailsActivity extends AppCompatActivity {
         buttonRequestChef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userId = "exampleUserId";
-                String userName = "exampleUserName";
-                String userEmail = "exampleUserEmail";
 
                 DatabaseReference requestsReference = FirebaseDatabase.getInstance().getReference("requests");
                 String requestId = requestsReference.push().getKey();
 
                 if (requestId != null) {
-                    Request request = new Request(requestId, chefId, userId, userName, userEmail);
+                    Request request = new Request(requestId, chefId, userId, userName, userContact, "Pending");
                     requestsReference.child(chefId).child(requestId).setValue(request).addOnSuccessListener(aVoid -> {
                         Toast.makeText(ChefDetailsActivity.this, "Request sent to the chef", Toast.LENGTH_SHORT).show();
                     }).addOnFailureListener(e -> {
                         Toast.makeText(ChefDetailsActivity.this, "Failed to send request: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
                 } else {
-                    // Toast.makeText(this, "Failed to create request ID", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "Failed to create request ID", Toast.LENGTH_SHORT).show();
                 }
             }
 
         });
-}
+    }
 }

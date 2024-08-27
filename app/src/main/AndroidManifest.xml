@@ -13,6 +13,20 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".UserRequestDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".EditUserProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
             android:name=".EditChefProfileActivity"
             android:exported="false" />
         <activity
@@ -33,9 +47,7 @@
         <activity
             android:name=".ChefActivity"
             android:exported="false" />
-        <activity
-            android:name=".AdminActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />

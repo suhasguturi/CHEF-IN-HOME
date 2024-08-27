@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             String userId = auth.getCurrentUser().getUid();
-                            User newUser = new User(name, email, role);
+                            User newUser = new User(name, email, role,"xxx xxxx xxxx");
                             usersRef.child(userId).setValue(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

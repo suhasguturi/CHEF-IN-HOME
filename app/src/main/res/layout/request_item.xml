@@ -16,9 +16,25 @@
         android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/textViewUserEmail"
+        android:id="@+id/textViewUserContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Email"
+        android:text="Contact"
+        android:layout_weight="1"
         android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending"
+        android:layout_weight="1"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/imageViewIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_view_icon"
+        android:layout_gravity="center_vertical"/>
 </LinearLayout>

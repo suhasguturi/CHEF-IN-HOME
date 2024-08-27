@@ -143,7 +143,7 @@ public class ChefActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_user, menu);
+        inflater.inflate(R.menu.menu_chef, menu);
         return true;
     }
 

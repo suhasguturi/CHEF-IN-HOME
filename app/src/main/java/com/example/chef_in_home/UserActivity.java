@@ -92,21 +92,27 @@ public class UserActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_profile) {
+   @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.action_profile) {
             Intent profileIntent = new Intent(UserActivity.this, ProfileActivity.class);
             startActivity(profileIntent);
             return true;
-        } else if (item.getItemId() == R.id.action_sign_out) {
-            Intent signOutIntent = new Intent(UserActivity  .this, SignOutActivity.class);
+        } else if (itemId == R.id.action_sign_out) {
+            Intent signOutIntent = new Intent(UserActivity.this, SignOutActivity.class);
             startActivity(signOutIntent);
+            return true;
+        } else if (itemId == R.id.action_request) {
+            Intent requestIntent = new Intent(UserActivity.this, RequestActivity.class);
+            startActivity(requestIntent);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
-}
+        }
+    }
 
-}
 
     private void addChef(String name, String specialty, boolean available, String contact, String experience, double rating, String bio) {
         String chefId = databaseReference.push().getKey();

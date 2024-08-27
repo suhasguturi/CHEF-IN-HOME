@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "User data not found", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
 

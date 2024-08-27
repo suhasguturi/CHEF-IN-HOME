@@ -141,6 +141,7 @@
             android:id="@+id/textViewRequestsHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:text="Requests"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -149,7 +150,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewRequests"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"/>
     </LinearLayout>
 </ScrollView>
